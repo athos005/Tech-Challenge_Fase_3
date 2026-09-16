@@ -1,4 +1,4 @@
-ELECT 
+SELECT 
     year, 
     TRIM(cloud_item) AS preferred_cloud, 
     preferred_language, 
