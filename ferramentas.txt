@@ -1,0 +1,13 @@
+ELECT 
+    year, 
+    TRIM(cloud_item) AS preferred_cloud, 
+    preferred_language, 
+    preferred_bi,
+    SUM(total_mentions) AS total_mentions
+FROM db_tech_challenge.tech_stack_preferences
+CROSS JOIN UNNEST(
+    SPLIT(REGEXP_REPLACE(preferred_cloud, '', ''), ',')) AS t(cloud_item)
+    WHERE preferred_cloud IS NOT NULL
+    AND preferred_language IS NOT NULL
+    GROUP BY year,TRIM(cloud_item),preferred_language,preferred_bi
+    ORDER BY year ASC, total_mentions DESC;

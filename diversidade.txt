@@ -1,0 +1,11 @@
+SELECT 
+    year, 
+    if("current_role" is null, 'Sem Resposta', "current_role")  AS cargo,
+    gender AS genero, 
+    ethnicity AS etnia_raca, 
+    SUM(total_professionals) AS total_profissionais
+FROM db_tech_challenge.diversity_profile
+WHERE gender IS NOT NULL 
+  AND ethnicity IS NOT NULL
+GROUP BY year, "current_role", gender, ethnicity
+ORDER BY year ASC, total_profissionais DESC;
